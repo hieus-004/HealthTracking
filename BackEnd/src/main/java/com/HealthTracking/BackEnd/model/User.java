@@ -26,6 +26,7 @@ public class User {
     private String email;
     private String gender;
     private Integer age;
+    private String activityLevel;
 
     @Column(nullable = false)
     private String password;

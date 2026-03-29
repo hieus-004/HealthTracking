@@ -19,6 +19,7 @@ public class Injury {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer injuryId;
+    private String injuryName;
     private Integer injuryScale; //from 1-10
     private OffsetDateTime timestamp;
 

@@ -32,5 +32,10 @@ public class BodyServices {
         return("Delete body is called");
     }
 
+    public String updateBody(Integer id, Body body) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'updateBody'");
+    }
+
 
 }

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Dashboard - ThinkPad Style</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #121212; color: #e5e7eb; font-family: 'Inter', sans-serif; }
+        .card { background-color: #1e1e1e; border: 1px solid #333; border-radius: 8px; }
+        .accent-red { color: #e22718; }
+        .bg-accent-red { background-color: #e22718; }
+    </style>
+</head>
+<body class="p-6">
+    <div class="max-w-6xl mx-auto">
+        <header class="flex justify-between items-center mb-8 border-b border-gray-800 pb-4">
+            <div>
+                <h1 class="text-2xl font-bold italic">THINK<span class="accent-red">FIT</span>_</h1>
+                <p class="text-gray-400 text-sm">Chào Hiếu, hôm nay bạn đã hoàn thành 60% mục tiêu.</p>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="text-right">
+                    <p class="text-sm font-semibold">Trọng Hiếu</p>
+                    <p class="text-xs text-gray-500">Backend Dev / N3 Japanese</p>
+                </div>
+                <div class="w-10 h-10 rounded-full bg-gray-700 border border-gray-600 flex items-center justify-center">
+                    <i class="fa-solid fa-user text-gray-400"></i>
+                </div>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="card p-6 flex flex-col items-center justify-center">
+                <h3 class="text-sm font-semibold mb-4 self-start uppercase tracking-wider text-gray-400">Dinh dưỡng hàng ngày</h3>
+                <div class="relative w-48 h-48 mb-6">
+                    <svg class="w-full h-full" viewBox="0 0 36 36">
+                        <path class="text-gray-800" stroke-width="3" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <path class="accent-red" stroke-width="3" stroke-dasharray="75, 100" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                    </svg>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                        <span class="text-3xl font-bold">1,850</span>
+                        <span class="text-xs text-gray-500">calo còn lại</span>
+                    </div>
+                </div>
+                <div class="w-full space-y-3">
+                    <div class="flex justify-between text-xs"><span>Đạm (Protein)</span><span class="text-blue-400">120/150g</span></div>
+                    <div class="w-full bg-gray-800 rounded-full h-1.5"><div class="bg-blue-500 h-1.5 rounded-full" style="width: 80%"></div></div>
+                    <div class="flex justify-between text-xs"><span>Tinh bột (Carbs)</span><span class="text-green-400">200/300g</span></div>
+                    <div class="w-full bg-gray-800 rounded-full h-1.5"><div class="bg-green-500 h-1.5 rounded-full" style="width: 66%"></div></div>
+                    <div class="flex justify-between text-xs"><span>Béo (Fat)</span><span class="text-yellow-400">45/70g</span></div>
+                    <div class="w-full bg-gray-800 rounded-full h-1.5"><div class="bg-yellow-500 h-1.5 rounded-full" style="width: 64%"></div></div>
+                </div>
+            </div>
+
+            <div class="md:col-span-2 space-y-6">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="card p-4">
+                        <p class="text-xs text-gray-500 uppercase">Cân nặng hiện tại</p>
+                        <p class="text-2xl font-bold">72.5 <span class="text-sm font-normal text-gray-400">kg</span></p>
+                        <div class="mt-4 h-2 bg-gray-800 rounded-full relative">
+                            <div class="absolute left-1/4 right-1/4 h-2 bg-green-900/50 border-x border-green-500"></div>
+                            <div class="absolute left-[45%] top-[-4px] w-4 h-4 bg-accent-red rounded-full border-2 border-white"></div>
+                        </div>
+                        <p class="text-[10px] mt-2 text-gray-500 flex justify-between">
+                            <span>Lý tưởng: 68kg</span>
+                            <span>78kg</span>
+                        </p>
+                    </div>
+                    <div class="card p-4">
+                        <p class="text-xs text-gray-500 uppercase">Khối lượng cơ (SMM)</p>
+                        <p class="text-2xl font-bold">34.2 <span class="text-sm font-normal text-gray-400">kg</span></p>
+                        <p class="text-xs text-green-400 mt-2"><i class="fa-solid fa-arrow-up"></i> +0.5kg từ tháng trước</p>
+                    </div>
+                </div>
+
+                <div class="card p-6 h-64 flex flex-col">
+                    <h3 class="text-sm font-semibold mb-4 uppercase tracking-wider text-gray-400">Tiến trình 7 ngày qua</h3>
+                    <div class="flex-grow flex items-end justify-between space-x-2">
+                        <div class="w-full bg-gray-800 h-[40%] rounded-t"></div>
+                        <div class="w-full bg-gray-800 h-[55%] rounded-t"></div>
+                        <div class="w-full bg-gray-800 h-[50%] rounded-t"></div>
+                        <div class="w-full bg-accent-red h-[75%] rounded-t"></div>
+                        <div class="w-full bg-gray-800 h-[60%] rounded-t"></div>
+                        <div class="w-full bg-gray-800 h-[65%] rounded-t"></div>
+                        <div class="w-full bg-gray-800 h-[45%] rounded-t"></div>
+                    </div>
+                    <div class="flex justify-between mt-2 text-[10px] text-gray-500 uppercase">
+                        <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-6 card p-4 border-l-4 border-l-red-600 bg-red-900/10">
+            <div class="flex items-start space-x-3">
+                <i class="fa-solid fa-robot accent-red mt-1"></i>
+                <div>
+                    <h4 class="text-sm font-bold uppercase accent-red">AI Health Insight</h4>
+                    <p class="text-sm text-gray-300">Dựa trên cân nặng 72.5kg và SMM hiện tại, hệ thống gợi ý bạn nên duy trì mức Protein 150g để tối ưu hóa việc tăng cơ nạc. Khoảng cân nặng lý tưởng của bạn (12-20% mỡ) là 68.5kg - 75.2kg.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

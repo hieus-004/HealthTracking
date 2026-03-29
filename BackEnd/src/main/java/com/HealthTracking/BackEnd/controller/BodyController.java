@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @RestController
+@RequestMapping("/api")
 public class BodyController {
 
     @Autowired
@@ -34,6 +37,11 @@ public class BodyController {
     @PostMapping("body")
     public String saveBody(@RequestBody Body body){
         return bodyServices.save(body);
+    }
+
+    @PutMapping("body/{id}")
+    public String updateBody(@PathVariable Integer id, @RequestBody Body body){
+        return bodyServices.updateBody(id, body);
     }
 
     @DeleteMapping("body/{id}")

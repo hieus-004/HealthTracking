@@ -19,10 +19,11 @@ public class Body {
     private Integer bodyId;
     
     private Integer height;
-    private Integer weight;
-    private Integer bodyfatPerc;
-    private Integer smm;
+    private Double weight;
+    private Double bodyfatPerc;
+    private Double smm;
     private OffsetDateTime timestamp;
+    private String target;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")

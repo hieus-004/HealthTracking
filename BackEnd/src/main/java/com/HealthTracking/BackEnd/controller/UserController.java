@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.HealthTracking.BackEnd.model.User;
+import com.HealthTracking.BackEnd.model.dto.UserBodyResponse;
 import com.HealthTracking.BackEnd.services.UserServices;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
 
 @RestController
 @RequestMapping("/api")
@@ -40,9 +42,8 @@ public class UserController {
     }
     
     @PutMapping("user")
-    public String putMethodName(@PathVariable String id, @RequestBody User user) {
-        userServices.updateUser(user);
-        return "PUT method is called";
+    public String updateUser(@RequestBody User user) {
+        return userServices.updateUser(user);
     }
 
     @DeleteMapping("user/{id}")
@@ -50,4 +51,10 @@ public class UserController {
         userServices.deleteUserById(id);
         return "DELETE method is called";
     }
-}
+
+    @GetMapping("user/{id}/bodyInfo")
+    public UserBodyResponse getBodyInfo(@PathVariable Integer id) {
+        return userServices.getBodyInfo(id);
+    }
+
+}   

@@ -7,12 +7,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.HealthTracking.BackEnd.model.Injury;
 import com.HealthTracking.BackEnd.services.InjuryServices;
 
 @RestController
+@RequestMapping("/api")
 public class InjuryController {
 
     @Autowired
@@ -42,4 +44,5 @@ public class InjuryController {
     public String deleteInjuryById(Integer id){
         return injuryServices.delete(id);
     }
+    
 }

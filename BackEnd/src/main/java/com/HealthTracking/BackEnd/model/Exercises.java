@@ -24,6 +24,6 @@ public class Exercises {
     
     private Integer pr;
     private String caution;
-    private Integer suitPerc;
+    private Double suitPerc;
 
 }
