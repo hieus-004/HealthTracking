@@ -18,12 +18,14 @@ public class Body {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer bodyId;
     
-    private Integer height;
+    private Double height;
     private Double weight;
     private Double bodyfatPerc;
     private Double smm;
     private OffsetDateTime timestamp;
+
     private String target;
+    private String targetIntensity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")

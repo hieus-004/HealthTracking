@@ -3,6 +3,7 @@ package com.HealthTracking.BackEnd.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,5 +40,12 @@ public class BodyPartController {
     @DeleteMapping("bodyPart/{id}")
     public String deleteBodyPartById(@PathVariable Integer id){
         return bodyPartServices.deleteById(id);
+    }
+
+    @PostMapping("/bodyPart/batch")
+    public ResponseEntity<?> createMultipleBodyParts(@RequestBody List<BodyPart> bodyParts) {
+        List<BodyPart> savedParts = bodyPartServices.saveAll(bodyParts);
+        return ResponseEntity.ok(savedParts);
+         
     }
 }

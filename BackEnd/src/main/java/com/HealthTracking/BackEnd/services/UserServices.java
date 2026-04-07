@@ -1,14 +1,18 @@
 package com.HealthTracking.BackEnd.services;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.HealthTracking.BackEnd.model.Body;
 import com.HealthTracking.BackEnd.model.User;
 import com.HealthTracking.BackEnd.model.dto.UserBodyResponse;
 import com.HealthTracking.BackEnd.repo.BodyRepo;
 import com.HealthTracking.BackEnd.repo.UserRepo;
 
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -55,21 +59,74 @@ public class UserServices {
 
     }
 
+    @Transactional
     public UserBodyResponse getBodyInfo(Integer id) {
-        User user = userRepo.findById(id).orElse(null);
-        if(user == null) return null;
+        User user = userRepo.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Không tìm thấy người dùng!"));
+
+        // Lấy bản ghi body mới nhất (nếu có)
+        Body latestBody = bodyRepo.findFirstByUser_UserIdOrderByTimestampDesc(id).orElse(null);
+
+        return mapToResponse(user, latestBody);
+    }
+
+    @Transactional
+    public UserBodyResponse updateBodyInfo(Integer id, UserBodyResponse bodyInfo) {
+        User user = userRepo.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Không tìm thấy người dùng!"));
+
+        // 1. Cập nhật Profile User (Ghi đè)
+        user.setUserName(bodyInfo.getUserName());
+        user.setAge(bodyInfo.getAge());
+        user.setGender(bodyInfo.getGender());
+        user.setActivityLevel(bodyInfo.getActivityLevel());
+        userRepo.save(user);
+
+        // 2. Lưu nhật ký Metric mới (Thêm mới)
+        Body newBody = new Body();
+        newBody.setUser(user);
+        newBody.setWeight(bodyInfo.getWeight());
+        newBody.setHeight(bodyInfo.getHeight());
+        newBody.setBodyfatPerc(bodyInfo.getBodyfatPerc());
+        newBody.setSmm(bodyInfo.getSmm());
+        newBody.setTarget(bodyInfo.getTarget());
+        newBody.setTimestamp(OffsetDateTime.now()); 
+        newBody.setTargetIntensity(bodyInfo.getTargetIntensity());
+
+        bodyRepo.save(newBody);
+
+        // 3. Trả về chính Response mới nhất để Frontend cập nhật UI
+        return mapToResponse(user, newBody);
+    }
+
+    // HÀM HELPER: Trái tim của sự tối ưu
+    private UserBodyResponse mapToResponse(User user, Body body) {
         UserBodyResponse response = new UserBodyResponse();
+        
+        // Map thông tin từ User
         response.setUserName(user.getUserName());
         response.setAge(user.getAge());
         response.setGender(user.getGender());
         response.setActivityLevel(user.getActivityLevel());
-        bodyRepo.findFirstByUser_UserIdOrderByTimestampDesc(id).ifPresent(body -> {
-            response.setWeight(body.getWeight().doubleValue());
-            response.setHeight(body.getHeight().doubleValue());
+
+        // Map thông tin từ Body (nếu có dữ liệu)
+        if (body != null) {
+            double w = body.getWeight();
+            double h = body.getHeight();
+            
+            response.setWeight(w);
+            response.setHeight(h);
             response.setBodyfatPerc(body.getBodyfatPerc());
             response.setSmm(body.getSmm());
             response.setTarget(body.getTarget());
-        });
+            response.setTargetIntensity(body.getTargetIntensity());
+
+            // Tự động tính BMI để Frontend không phải làm
+            if (h > 0) {
+                double bmi = w / Math.pow(h / 100, 2);
+                response.setBmi(Math.round(bmi * 10.0) / 10.0);
+            }
+        }
         return response;
     }
 

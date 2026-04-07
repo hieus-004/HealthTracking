@@ -3,6 +3,7 @@ package com.HealthTracking.BackEnd.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.HealthTracking.BackEnd.model.BodyPart;
@@ -30,6 +31,10 @@ public class BodyPartServices {
     public String deleteById(Integer id) {
         bodyPartRepo.deleteById(id);
         return("Delete bodyPart is called");
+    }
+
+    public List<BodyPart> saveAll(List<BodyPart> bodyParts) {
+        return bodyPartRepo.saveAll(bodyParts);
     }
 
 }

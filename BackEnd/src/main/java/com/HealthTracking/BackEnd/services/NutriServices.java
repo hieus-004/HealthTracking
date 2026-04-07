@@ -1,12 +1,16 @@
 package com.HealthTracking.BackEnd.services;
 
+import java.time.LocalDate;
+
 import org.springframework.stereotype.Service;
 
 import com.HealthTracking.BackEnd.model.Body;
+import com.HealthTracking.BackEnd.model.DailyMacro;
 import com.HealthTracking.BackEnd.model.User;
 import com.HealthTracking.BackEnd.model.dto.DailyMacroResponse;
 import com.HealthTracking.BackEnd.model.dto.WeightRangeResponse;
 import com.HealthTracking.BackEnd.repo.BodyRepo;
+import com.HealthTracking.BackEnd.repo.DailyMacroRepo;
 import com.HealthTracking.BackEnd.repo.UserRepo;
 
 import lombok.RequiredArgsConstructor;
@@ -16,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 public class NutriServices {
     private final UserRepo userRepo;
     private final BodyRepo bodyRepo;
+    private final DailyMacroRepo dailyMacroRepo;
 
     private Integer cunningham(Double weight, Double smm, Double bodyfatPerc) {
         return (int) Math.round(500 + 22 * smm);
@@ -32,7 +37,24 @@ public class NutriServices {
         
         User user = userRepo.findById(id).orElse(null);
         Body body = bodyRepo.findFirstByUser_UserIdOrderByTimestampDesc(id).orElse(null);
-        Double PAL = 1.2; // default to sedentary
+        Double caloriesSpeed;
+        switch (body.getTargetIntensity().toLowerCase()) {
+            case "fast":
+                caloriesSpeed = 0.2;
+                break;
+        
+            case "aggressive":
+                caloriesSpeed = 0.25;
+                break;
+            
+            case "balanced":
+                caloriesSpeed = 0.1;
+                break;
+            default:
+                caloriesSpeed = 0.0;
+        }
+
+        Double PAL = 1.2; 
         if(user != null && user.getActivityLevel() != null) {
             switch (user.getActivityLevel().toLowerCase()) {
                 case "sedentary":
@@ -51,7 +73,7 @@ public class NutriServices {
                     PAL = 1.9;
                     break;
                 default:
-                    PAL = 1.2; // fallback to sedentary if unrecognized
+                    PAL = 1.2; 
             }
         }
         if(body.getBodyfatPerc() != null && body.getSmm() != null) {
@@ -59,14 +81,15 @@ public class NutriServices {
             calories = (int) Math.round(calories * PAL);
             DailyMacroResponse response = new DailyMacroResponse();
             if(body.getTarget().equalsIgnoreCase("lose weight")) {
-                calories = (int) Math.round(calories * 0.9);
+                calories = (int) Math.round(calories * (1 - caloriesSpeed));
                 response.setProtein((int) Math.round(2.3 * body.getWeight()));
                 response.setFat((int) Math.round(calories * 0.2 / 9));
                 response.setCarbs((int) Math.round((calories - response.getProtein() * 4 - response.getFat() * 9) / 4));
+                System.out.println(response.getProtein() + " " + response.getFat() + " " + response.getCarbs());
             }
-            else if(body.getTarget().equalsIgnoreCase("gain weight")) {
+            else if(body.getTarget().equalsIgnoreCase("gain muscle")) {
                 System.out.println(body.getTarget());
-                calories = (int) Math.round(calories * 1.1);
+                calories = (int) Math.round(calories * (1 + caloriesSpeed));
                 response.setProtein((int) Math.round(2 * body.getWeight()));
                 response.setFat((int) Math.round(calories * 0.25 / 9));
                 response.setCarbs((int) Math.round((calories - response.getProtein() * 4 - response.getFat() * 9) / 4));
@@ -77,6 +100,7 @@ public class NutriServices {
                 response.setProtein((int) Math.round(2 * body.getWeight()));
                 response.setFat((int) Math.round(calories * 0.25 / 9));
                 response.setCarbs((int) Math.round((calories - response.getProtein() * 4 - response.getFat() * 9) / 4));
+                System.out.println(response.getProtein() + " " + response.getFat() + " " + response.getCarbs());
             }
             response.setCalories(calories);
             return response;
@@ -87,14 +111,14 @@ public class NutriServices {
             calories = (int) Math.round(calories * PAL);
             DailyMacroResponse response = new DailyMacroResponse();
             if(body.getTarget().equalsIgnoreCase("lose weight")) {
-                calories = (int) Math.round(calories * 0.9);
+                calories = (int) Math.round(calories * (1 - caloriesSpeed));
                 response.setProtein((int) Math.round(2.3 * body.getWeight()));
                 response.setFat((int) Math.round(calories * 0.2 / 9));
                 response.setCarbs((int) Math.round((calories - response.getProtein() * 4 - response.getFat() * 9) / 4));
             }
-            else if(body.getTarget().equalsIgnoreCase("gain weight")) {
+            else if(body.getTarget().equalsIgnoreCase("gain muscle")) {
                 System.out.println(body.getTarget());
-                calories = (int) Math.round(calories * 1.1);
+                calories = (int) Math.round(calories * (1 + caloriesSpeed));
                 response.setProtein((int) Math.round(2 * body.getWeight()));
                 response.setFat((int) Math.round(calories * 0.25 / 9));
                 response.setCarbs((int) Math.round((calories - response.getProtein() * 4 - response.getFat() * 9) / 4));
@@ -110,8 +134,8 @@ public class NutriServices {
             return response;
         }
 
-        // Calculate and return recommended calories based on user and body data
-        return null; // Replace with actual implementation
+        
+        return null; 
     }
 
     public WeightRangeResponse getWeightRange(Integer id) {
@@ -142,5 +166,24 @@ public class NutriServices {
             response.setMaxWeight(Math.round(maxWeight * 10.0) / 10.0);
         }
         return response;
+    }
+
+    public DailyMacroResponse getTodayMacro(Integer id) {
+        DailyMacroResponse response = getRecommendedCalories(id);
+        LocalDate today = LocalDate.now();
+        DailyMacro todayMacro = dailyMacroRepo.findFirstByUser_UserIdAndDate(id, today).orElse(null);
+        if (todayMacro != null) {
+            response.setCCalories(Math.round(todayMacro.getCKcal().floatValue()));
+            response.setCProtein(todayMacro.getCProtein().intValue()); 
+            response.setCCarbs(todayMacro.getCCarb().intValue());
+            response.setCFat(todayMacro.getCFat().intValue());
+        } else {
+            response.setCCalories(0);
+            response.setCProtein(0);
+            response.setCCarbs(0);
+            response.setCFat(0);
+        }
+        return response;
+
     }
 }

@@ -3,6 +3,10 @@ package com.HealthTracking.BackEnd.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.Nationalized;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -20,12 +24,15 @@ public class BodyPart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer partId;
 
+    @Nationalized
     private String partName; 
 
+    @JsonIgnore
     @OneToMany(mappedBy = "bodyPart", fetch = FetchType.LAZY)
     private List<Exercises> exercisesList= new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "bodyPart", fetch = FetchType.LAZY)
-    private List<Injury> injuries = new ArrayList<>();
+    private List<Joints> joints = new ArrayList<>();
 
 }

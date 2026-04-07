@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.HealthTracking.BackEnd.model.BodyPart;
 import com.HealthTracking.BackEnd.model.Exercises;
 import com.HealthTracking.BackEnd.services.ExercisesServices;
 
@@ -35,5 +36,12 @@ public class ExercisesController {
     @PostMapping("exercises")
     public ResponseEntity<String> saveExercises(@RequestBody Exercises exercises){
         return new ResponseEntity<>(exercisesServices.save(exercises).toString(), HttpStatus.CREATED);
+    }
+
+    @PostMapping("exercises/batch")
+    public ResponseEntity<?> createMultipleBodyParts(@RequestBody List<Exercises> exercises) {
+        List<Exercises> savedEx = exercisesServices.saveAll(exercises);
+        return ResponseEntity.ok(savedEx);
+         
     }
 }

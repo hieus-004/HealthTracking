@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body Metrics Lab - ThinkFit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #121212; color: #e5e7eb; font-family: 'Inter', sans-serif; }
+        .card { background-color: #1e1e1e; border: 1px solid #333; border-radius: 8px; }
+        .accent-red { color: #e22718; }
+        
+        /* Styled Inputs */
+        input, select {
+            background-color: #1a1a1a !important;
+            border: 1px solid #444 !important;
+            color: white !important;
+            transition: all 0.2s;
+        }
+        input:focus, select:focus {
+            border-color: #e22718 !important;
+            outline: none;
+            box-shadow: 0 0 0 1px #e22718;
+        }
+
+        /* Anatomy schematic placeholder style */
+        .anatomy-map {
+            background-image: linear-gradient(to bottom, #1e1e1e, #151515);
+            border: 2px dashed #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body class="p-6">
+    <div class="max-w-7xl mx-auto">
+        
+        <header class="flex items-center justify-between mb-10 pb-4 border-b border-gray-800">
+            <h1 class="text-3xl font-black uppercase tracking-tighter italic">
+                Body <span class="accent-red">Metrics Lab_</span>
+            </h1>
+            <div class="flex space-x-3">
+                <button class="px-5 py-2.5 text-xs font-bold text-gray-400 hover:text-white transition-colors">HỦY BỎ</button>
+                <button class="px-8 py-2.5 text-xs font-bold bg-red-600 hover:bg-red-700 text-white rounded shadow-lg shadow-red-900/20 transition-all uppercase tracking-wider">
+                    Xác nhận thông số
+                </button>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            
+            <form class="lg:col-span-5 space-y-6">
+                
+                <div class="card p-6 space-y-5 border-t-2 border-red-600">
+                    <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Thông tin cá nhân</h3>
+                    
+                    <div>
+                        <label class="block text-[10px] text-gray-400 uppercase mb-2">Họ và tên</label>
+                        <input type="text" value="Trọng Kiên" class="w-full p-3 rounded text-sm font-semibold">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-[10px] text-gray-400 uppercase mb-2">Tuổi</label>
+                            <input type="number" value="22" class="w-full p-3 rounded text-sm font-semibold">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-gray-400 uppercase mb-2">Giới tính</label>
+                            <select class="w-full p-3 rounded text-sm font-semibold appearance-none">
+                                <option value="Male" selected>Nam (Male)</option>
+                                <option value="Female">Nữ (Female)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6 space-y-5">
+                    <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Chỉ số đo lường InBody</h3>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-[10px] text-gray-400 uppercase mb-2">Chiều cao (cm)</label>
+                            <input type="number" step="0.1" value="175.0" class="w-full p-3 rounded text-sm font-semibold border-l-2 border-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-gray-400 uppercase mb-2">Cân nặng (kg)</label>
+                            <input type="number" step="0.1" value="65.0" class="w-full p-3 rounded text-sm font-semibold border-l-2 border-blue-500">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 pt-2">
+                        <div>
+                            <label class="block text-[10px] text-gray-400 uppercase mb-2">Body Fat (%)</label>
+                            <input type="number" step="0.1" placeholder="Optional" class="w-full p-3 rounded text-sm font-semibold border-dashed border-gray-600">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-gray-400 uppercase mb-2">SMM (Cơ - kg)</label>
+                            <input type="number" step="0.1" placeholder="Optional" class="w-full p-3 rounded text-sm font-semibold border-dashed border-gray-600">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-6 space-y-5">
+                    <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Lối sống & Mục tiêu</h3>
+                    
+                    <div>
+                        <label class="block text-[10px] text-gray-400 uppercase mb-2">Mức độ vận động</label>
+                        <select class="w-full p-3 rounded text-sm font-semibold appearance-none">
+                            <option value="sedentary">Ít vận động (Sedentary)</option>
+                            <option value="lightly active">Vận động nhẹ</option>
+                            <option value="moderately active" selected>Vận động vừa (Moderately)</option>
+                            <option value="very active">Vận động nhiều</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] text-gray-400 uppercase mb-2">Mục tiêu hiện tại</label>
+                        <select class="w-full p-3 rounded text-sm font-semibold appearance-none">
+                            <option value="lose weight" selected>Giảm cân (Lose Weight)</option>
+                            <option value="maintain">Duy trì (Maintain)</option>
+                            <option value="gain muscle">Tăng cơ (Gain Muscle)</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+
+            <div class="lg:col-span-7 space-y-8">
+                
+                <div class="anatomy-map h-[500px] relative p-8">
+                    <div class="text-center opacity-30">
+                        <i class="fa-solid fa-person text-9xl text-gray-600"></i>
+                        <p class="text-xs mt-4 text-gray-500">[ Sơ đồ cơ thể 3D - ThinkFit Schematic ]</p>
+                    </div>
+
+                    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 text-center bg-gray-950/80 px-4 py-2 rounded-lg border border-blue-800 shadow-xl">
+                        <p class="text-[10px] text-gray-500 uppercase">BMI Hiện tại</p>
+                        <p class="text-4xl font-black text-blue-400">21.2</p>
+                        <p class="text-xs text-green-500 font-bold bg-green-900/30 px-2 py-0.5 rounded mt-1">HEALTHY ZONE</p>
+                    </div>
+
+                    </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    
+                    <div class="card p-5 border-l-4 border-l-blue-500 bg-blue-950/10">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <i class="fa-solid fa-calculator text-blue-500 text-xs"></i>
+                            <h4 class="text-[10px] font-bold uppercase text-blue-500 tracking-wider">Phân tích BMI Châu Á</h4>
+                        </div>
+                        <p class="text-xs text-gray-300 leading-relaxed">
+                            Với chiều cao 175cm và cân nặng 65kg, chỉ số BMI của bạn là **21.2**. Bạn đang ở trạng thái **Bình thường** và khỏe mạnh.
+                        </p>
+                    </div>
+
+                    <div class="card p-5 border-l-4 border-l-orange-500 bg-orange-950/10">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <i class="fa-solid fa-fire text-orange-500 text-xs"></i>
+                            <h4 class="text-[10px] font-bold uppercase text-orange-400 tracking-wider">Mục tiêu Calo dự kiến</h4>
+                        </div>
+                        <p class="text-xs text-gray-300 leading-relaxed">
+                            Dựa trên lối sống **Moderately Active** và mục tiêu **Lose Weight**, AI gợi ý mức năng lượng hàng ngày là **~2,100 kcal**.
+                        </p>
+                    </div>
+
+                    <div class="card p-5 border-l-4 border-l-gray-600 col-span-1 md:col-span-2 bg-gray-900/50">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <i class="fa-solid fa-atom text-gray-500 text-xs"></i>
+                            <h4 class="text-[10px] font-bold uppercase text-gray-500 tracking-wider">Tối ưu hóa dữ liệu (InBody)</h4>
+                        </div>
+                        <p class="text-xs text-gray-400 leading-relaxed">
+                            Nhập thêm **Body Fat %** và **SMM** sẽ giúp sơ đồ cơ thể hiển thị rõ nét hơn về thành phần cơ/mỡ và áp dụng công thức tính toán **Cunningham** chính xác hơn.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

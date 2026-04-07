@@ -7,9 +7,12 @@ import com.HealthTracking.BackEnd.model.User;
 import com.HealthTracking.BackEnd.model.dto.UserBodyResponse;
 import com.HealthTracking.BackEnd.services.UserServices;
 
+import jakarta.validation.Valid;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,8 +56,16 @@ public class UserController {
     }
 
     @GetMapping("user/{id}/bodyInfo")
-    public UserBodyResponse getBodyInfo(@PathVariable Integer id) {
-        return userServices.getBodyInfo(id);
+    public ResponseEntity<UserBodyResponse> getBodyInfo(@PathVariable Integer id) {
+        UserBodyResponse response = userServices.getBodyInfo(id);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("user/{id}/bodyInfo")
+    public ResponseEntity<UserBodyResponse> updateBodyInfo(@PathVariable Integer id, @Valid @RequestBody UserBodyResponse bodyInfo) {
+        UserBodyResponse updatedInfo = userServices.updateBodyInfo(id, bodyInfo);
+        // Trả về 200 OK kèm data mới nhất
+        return ResponseEntity.ok(updatedInfo); 
     }
 
 }   

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Anatomy - ThinkFit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #121212; color: #e5e7eb; font-family: 'Inter', sans-serif; }
+        .card { background-color: #1e1e1e; border: 1px solid #333; border-radius: 8px; transition: all 0.2s; }
+        .card:hover { border-color: #e22718; background-color: #252525; }
+        .accent-red { color: #e22718; }
+        .bg-accent-red { background-color: #e22718; }
+        .muscle-tag { font-size: 10px; background: #333; color: #bbb; padding: 2px 6px; border-radius: 4px; }
+        .input-dark { background-color: #1a1a1a; border: 1px solid #444; color: white; }
+        .input-dark:focus { border-color: #e22718; outline: none; }
+    </style>
+</head>
+<body class="p-6">
+    <div class="max-w-6xl mx-auto">
+        
+        <header class="mb-10">
+            <h1 class="text-3xl font-black uppercase tracking-tighter italic">
+                Muscle <span class="accent-red">Targeting_</span>
+            </h1>
+            <p class="text-xs text-gray-500 mt-1 uppercase tracking-widest">Chọn nhóm cơ để bắt đầu buổi tập hoặc cập nhật trạng thái</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            
+            <div class="lg:col-order-2 space-y-6">
+                    <div class="card p-5 border-t-4 border-red-600">
+                    <h3 class="text-xs font-bold uppercase text-gray-400 mb-6 flex items-center">
+                        <i class="fa-solid fa-hand-holding-medical mr-2 accent-red"></i> Nhật ký chấn thương
+                    </h3>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-[10px] text-gray-500 uppercase mb-2 tracking-widest">Vùng bị ảnh hưởng</label>
+                            <select class="w-full p-2.5 text-xs rounded input-dark font-semibold">
+                                <option value="" disabled selected>-- Chọn vùng cơ --</option>
+                                <option value="chest">Ngực (Chest)</option>
+                                <option value="back">Lưng (Back)</option>
+                                <option value="arms">Tay (Arms/Wrist)</option>
+                                <option value="legs">Chân (Legs/Ankle)</option>
+                                <option value="shoulders">Vai (Shoulders)</option>
+                                <option value="abs">Bụng (Abs/Core)</option>
+                                <option value="neck">Cổ (Neck)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] text-gray-500 uppercase mb-2 tracking-widest">Mức độ đau (1-10)</label>
+                            <select class="w-full p-2.5 text-xs rounded input-dark font-semibold border-l-2 border-l-orange-500">
+                                <option value="" disabled selected>-- Đánh giá mức độ --</option>
+                                <option value="1">1-2: Nhẹ (Cảm nhận được, vẫn tập tốt)</option>
+                                <option value="3">3-4: Khó chịu (Đau âm ỉ, nên giảm tải)</option>
+                                <option value="5">5-6: Trung bình (Đau rõ, hạn chế vận động)</option>
+                                <option value="7">7-8: Nặng (Đau nhói, dừng tập vùng này)</option>
+                                <option value="9">9-10: Cấp cứu (Đau dữ dội, đi bác sĩ ngay)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] text-gray-500 uppercase mb-2 tracking-widest">Mô tả thêm (Tùy chọn)</label>
+                            <textarea class="w-full p-3 text-xs rounded input-dark h-20" placeholder="Ví dụ: Đau khi thực hiện bài Bench Press..."></textarea>
+                        </div>
+
+                        <button class="w-full py-2.5 bg-red-600 hover:bg-red-700 text-white text-[10px] font-bold uppercase rounded shadow-lg shadow-red-900/20 transition-all">
+                            Xác nhận ghi chép
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card p-5 bg-blue-900/5 border-l-4 border-blue-500">
+                    <p class="text-[11px] text-blue-400 leading-relaxed italic">
+                        "Hệ thống sẽ tự động loại bỏ các bài tập tác động trực tiếp đến vùng chấn thương trong các gợi ý của AI Agent."
+                    </p>
+                </div>
+            </div>
+
+            <div class="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-4">
+                
+                <div class="card p-5 cursor-pointer relative overflow-hidden group">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h4 class="text-lg font-black uppercase italic group-hover:accent-red transition-colors">NGỰC (CHEST)</h4>
+                            <p class="text-[10px] text-gray-500 mt-1 uppercase">Cơ ngực lớn, ngực bé, răng cưa.</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-[10px] text-gray-500">TẬP LẦN CUỐI</p>
+                            <p class="text-xs font-bold text-green-500">Hôm qua</p>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2 mt-4">
+                        <span class="muscle-tag">Upper Chest</span>
+                        <span class="muscle-tag">Lower Chest</span>
+                    </div>
+                    <i class="fa-solid fa-shield-halved absolute -right-4 -bottom-4 text-6xl text-white/5 group-hover:text-red-600/10 transition-all"></i>
+                </div>
+
+                <div class="card p-5 cursor-pointer relative overflow-hidden group">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h4 class="text-lg font-black uppercase italic group-hover:accent-red transition-colors">LƯNG (BACK)</h4>
+                            <p class="text-[10px] text-gray-500 mt-1 uppercase">Cơ xô, cơ thang, cơ dựng gai.</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-[10px] text-gray-500">TẬP LẦN CUỐI</p>
+                            <p class="text-xs font-bold text-gray-600">3 ngày trước</p>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2 mt-4">
+                        <span class="muscle-tag">Lats</span>
+                        <span class="muscle-tag">Traps</span>
+                        <span class="muscle-tag">Lower Back</span>
+                    </div>
+                    <i class="fa-solid fa-dna absolute -right-4 -bottom-4 text-6xl text-white/5 group-hover:text-red-600/10 transition-all"></i>
+                </div>
+
+                <div class="card p-5 cursor-pointer relative overflow-hidden group">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h4 class="text-lg font-black uppercase italic group-hover:accent-red transition-colors">CHÂN (LEGS)</h4>
+                            <p class="text-[10px] text-gray-500 mt-1 uppercase">Đùi trước, đùi sau, mông, bắp chân.</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-[10px] text-gray-500">TẬP LẦN CUỐI</p>
+                            <p class="text-xs font-bold text-red-500">7 ngày trước (Quá hạn!)</p>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2 mt-4">
+                        <span class="muscle-tag">Quads</span>
+                        <span class="muscle-tag">Hamstrings</span>
+                        <span class="muscle-tag">Glutes</span>
+                    </div>
+                    <i class="fa-solid fa- person-running absolute -right-4 -bottom-4 text-6xl text-white/5 group-hover:text-red-600/10 transition-all"></i>
+                </div>
+
+                <div class="card p-5 cursor-pointer relative overflow-hidden group">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h4 class="text-lg font-black uppercase italic group-hover:accent-red transition-colors">TAY (ARMS)</h4>
+                            <p class="text-[10px] text-gray-500 mt-1 uppercase">Bắp tay trước, bắp tay sau, cẳng tay.</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-[10px] text-gray-500">TẬP LẦN CUỐI</p>
+                            <p class="text-xs font-bold text-gray-600">2 ngày trước</p>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2 mt-4">
+                        <span class="muscle-tag">Biceps</span>
+                        <span class="muscle-tag">Triceps</span>
+                    </div>
+                    <i class="fa-solid fa-hand-fist absolute -right-4 -bottom-4 text-6xl text-white/5 group-hover:text-red-600/10 transition-all"></i>
+                </div>
+
+                <div class="card p-5 cursor-pointer relative overflow-hidden group md:col-span-2">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h4 class="text-lg font-black uppercase italic group-hover:accent-red transition-colors">BỤNG (ABS/CORE)</h4>
+                            <p class="text-[10px] text-gray-500 mt-1 uppercase">Cơ bụng sáu múi, cơ liên sườn.</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-[10px] text-gray-500">TẬP LẦN CUỐI</p>
+                            <p class="text-xs font-bold text-green-500">Hôm nay</p>
+                        </div>
+                    </div>
+                    <div class="flex space-x-2 mt-4">
+                        <span class="muscle-tag">Rectus Abdominis</span>
+                        <span class="muscle-tag">Obliques</span>
+                    </div>
+                    <i class="fa-solid fa-rug absolute -right-4 -bottom-4 text-6xl text-white/5 group-hover:text-red-600/10 transition-all"></i>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

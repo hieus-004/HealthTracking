@@ -28,4 +28,8 @@ public class ExercisesServices {
         }
         return exercisesRepo.save(exercises);
     }
+
+    public List<Exercises> saveAll(List<Exercises> exercises) {
+        return exercisesRepo.saveAll(exercises);
+    }
 }

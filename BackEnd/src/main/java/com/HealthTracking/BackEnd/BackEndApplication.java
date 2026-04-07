@@ -2,14 +2,13 @@ package com.HealthTracking.BackEnd;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
 
 
 @SpringBootApplication
 public class BackEndApplication {
 
 	public static void main(String[] args) {
-		ApplicationContext context = SpringApplication.run(BackEndApplication.class, args);
+		SpringApplication.run(BackEndApplication.class, args);
 
 		
 	}

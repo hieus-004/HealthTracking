@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body Evolution - ThinkFit</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #0f0f0f; color: #e5e7eb; font-family: 'Inter', sans-serif; }
+        .card { background-color: #1a1a1a; border: 1px solid #333; border-radius: 12px; }
+        .accent-red { color: #e22718; }
+        .bg-accent-red { background-color: #e22718; }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #1a1a1a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <div class="max-w-6xl mx-auto">
+        
+        <header class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+            <div>
+                <h1 class="text-4xl font-black uppercase tracking-tighter italic">
+                    Body <span class="accent-red">Evolution_</span>
+                </h1>
+                <p class="text-xs text-gray-500 mt-2 uppercase tracking-widest">Theo dõi hành trình biến đổi hình thể</p>
+            </div>
+            <div class="flex space-x-2">
+                <button class="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded text-[10px] font-bold uppercase transition-all">Xuất báo cáo (PDF)</button>
+                <button class="px-4 py-2 bg-accent-red hover:bg-red-700 rounded text-[10px] font-bold uppercase transition-all shadow-lg shadow-red-900/20">Thêm chỉ số mới</button>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            <div class="card p-5 border-l-4 border-blue-500">
+                <p class="text-[10px] text-gray-500 uppercase">Cân nặng hiện tại</p>
+                <div class="flex items-baseline space-x-2 mt-1">
+                    <span class="text-2xl font-bold">65.0</span>
+                    <span class="text-[10px] text-green-500 font-bold"><i class="fa-solid fa-arrow-down"></i> 2.5kg</span>
+                </div>
+            </div>
+            <div class="card p-5 border-l-4 border-red-500">
+                <p class="text-[10px] text-gray-500 uppercase">Tỷ lệ mỡ (Body Fat)</p>
+                <div class="flex items-baseline space-x-2 mt-1">
+                    <span class="text-2xl font-bold">18.2%</span>
+                    <span class="text-[10px] text-green-500 font-bold"><i class="fa-solid fa-arrow-down"></i> 1.8%</span>
+                </div>
+            </div>
+            <div class="card p-5 border-l-4 border-emerald-500">
+                <p class="text-[10px] text-gray-500 uppercase">Khối lượng cơ (SMM)</p>
+                <div class="flex items-baseline space-x-2 mt-1">
+                    <span class="text-2xl font-bold">32.4kg</span>
+                    <span class="text-[10px] text-emerald-500 font-bold"><i class="fa-solid fa-arrow-up"></i> 0.6kg</span>
+                </div>
+            </div>
+            <div class="card p-5 border-l-4 border-yellow-500">
+                <p class="text-[10px] text-gray-500 uppercase">Chu kỳ hiện tại</p>
+                <div class="flex items-baseline space-x-2 mt-1">
+                    <span class="text-2xl font-bold">42</span>
+                    <span class="text-[10px] text-gray-500 font-bold uppercase ml-1">Ngày tập</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <div class="lg:col-span-2 space-y-6">
+                <div class="card p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400">Xu hướng Cân nặng & Cơ bắp</h3>
+                        <div class="flex space-x-4 text-[10px] uppercase font-bold">
+                            <span class="flex items-center"><span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span> Weight</span>
+                            <span class="flex items-center"><span class="w-2 h-2 bg-emerald-500 rounded-full mr-2"></span> SMM</span>
+                        </div>
+                    </div>
+                    <div class="h-64">
+                        <canvas id="weightChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card p-6">
+                    <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-6">Biến thiên Tỷ lệ mỡ (%)</h3>
+                    <div class="h-64">
+                        <canvas id="fatChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <div class="card overflow-hidden">
+                    <div class="p-4 border-b border-gray-800 flex justify-between items-center bg-gray-800/20">
+                        <h3 class="text-xs font-bold uppercase tracking-widest text-gray-400">Lịch sử đo lường</h3>
+                        <i class="fa-solid fa-clock-rotate-left text-gray-600 text-xs"></i>
+                    </div>
+                    <div class="max-h-[600px] overflow-y-auto divide-y divide-gray-800">
+                        <div class="p-4 hover:bg-white/5 transition-all">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-[10px] font-mono text-gray-500">30/03/2026</span>
+                                <span class="text-[10px] bg-green-900/30 text-green-500 px-2 py-0.5 rounded">Ổn định</span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-2">
+                                <div><p class="text-[9px] text-gray-600 uppercase">Weight</p><p class="text-sm font-bold">65.0kg</p></div>
+                                <div><p class="text-[9px] text-gray-600 uppercase">Fat</p><p class="text-sm font-bold text-red-500">18.2%</p></div>
+                                <div><p class="text-[9px] text-gray-600 uppercase">SMM</p><p class="text-sm font-bold text-blue-500">32.4kg</p></div>
+                            </div>
+                        </div>
+                        <div class="p-4 hover:bg-white/5 transition-all">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-[10px] font-mono text-gray-500">23/03/2026</span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-2">
+                                <div><p class="text-[9px] text-gray-600 uppercase">Weight</p><p class="text-sm font-bold">65.8kg</p></div>
+                                <div><p class="text-[9px] text-gray-600 uppercase">Fat</p><p class="text-sm font-bold text-red-500">19.0%</p></div>
+                                <div><p class="text-[9px] text-gray-600 uppercase">SMM</p><p class="text-sm font-bold text-blue-500">32.2kg</p></div>
+                            </div>
+                        </div>
+                        <div class="p-4 hover:bg-white/5 transition-all">
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-[10px] font-mono text-gray-500">15/03/2026</span>
+                            </div>
+                            <div class="grid grid-cols-3 gap-2">
+                                <div><p class="text-[9px] text-gray-600 uppercase">Weight</p><p class="text-sm font-bold">67.5kg</p></div>
+                                <div><p class="text-[9px] text-gray-600 uppercase">Fat</p><p class="text-sm font-bold text-red-500">20.0%</p></div>
+                                <div><p class="text-[9px] text-gray-600 uppercase">SMM</p><p class="text-sm font-bold text-blue-500">31.8kg</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card p-5 border-l-4 border-yellow-500 bg-yellow-950/10">
+                    <h4 class="text-[10px] font-bold text-yellow-500 uppercase mb-3 tracking-widest"><i class="fa-solid fa-trophy mr-2"></i> Thành tựu nổi bật</h4>
+                    <ul class="space-y-3 text-[11px] text-gray-400">
+                        <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-2"></i> Bạn đã duy trì thâm hụt Calo trong 4 tuần liên tục.</li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-green-500 mt-0.5 mr-2"></i> Khối lượng cơ nạc (LBM) tăng 0.6kg - Kết quả Recomp rất tốt!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Config cho biểu đồ Cân nặng & SMM
+        const weightCtx = document.getElementById('weightChart').getContext('2d');
+        new Chart(weightCtx, {
+            type: 'line',
+            data: {
+                labels: ['Tuần 1', 'Tuần 2', 'Tuần 3', 'Tuần 4'],
+                datasets: [{
+                    label: 'Cân nặng (kg)',
+                    data: [67.5, 66.8, 65.8, 65.0],
+                    borderColor: '#3b82f6',
+                    tension: 0.4,
+                    borderWidth: 3,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#3b82f6'
+                }, {
+                    label: 'SMM (kg)',
+                    data: [31.8, 32.0, 32.2, 32.4],
+                    borderColor: '#10b981',
+                    tension: 0.4,
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { grid: { color: '#222' }, ticks: { color: '#555', font: { size: 10 } } },
+                    x: { grid: { display: false }, ticks: { color: '#555', font: { size: 10 } } }
+                }
+            }
+        });
+
+        // Biểu đồ Body Fat
+        const fatCtx = document.getElementById('fatChart').getContext('2d');
+        new Chart(fatCtx, {
+            type: 'line',
+            data: {
+                labels: ['Tuần 1', 'Tuần 2', 'Tuần 3', 'Tuần 4'],
+                datasets: [{
+                    label: 'Body Fat (%)',
+                    data: [20.0, 19.5, 19.0, 18.2],
+                    borderColor: '#ef4444',
+                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { grid: { color: '#222' }, ticks: { color: '#555', font: { size: 10 } } },
+                    x: { grid: { display: false }, ticks: { color: '#555', font: { size: 10 } } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
