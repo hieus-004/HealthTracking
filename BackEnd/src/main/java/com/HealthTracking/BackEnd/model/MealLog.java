@@ -1,6 +1,8 @@
 package com.HealthTracking.BackEnd.model;
 import java.time.LocalDate;
 
+import org.hibernate.annotations.Nationalized;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -28,5 +30,7 @@ public class MealLog {
 
     private Integer amount;
 
+    @Nationalized
+    private String mealTime;
     private LocalDate date;
 }

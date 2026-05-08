@@ -35,10 +35,10 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Injury> injuries = new ArrayList<>();
+    // @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    // private List<Injury> injuries = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<DailyMacro> dailyMacros = new ArrayList<>();
+    // @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    // private List<DailyMacro> dailyMacros = new ArrayList<>();
 
 }

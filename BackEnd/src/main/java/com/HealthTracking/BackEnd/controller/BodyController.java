@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.HealthTracking.BackEnd.model.Body;
 import com.HealthTracking.BackEnd.model.dto.BodyResponse;
 import com.HealthTracking.BackEnd.services.BodyServices;
-import com.HealthTracking.BackEnd.services.UserServices;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;

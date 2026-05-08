@@ -1,8 +1,10 @@
 package com.HealthTracking.BackEnd.model;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDate;
 
 import org.hibernate.annotations.Nationalized;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -25,16 +27,18 @@ public class Injury {
     @Nationalized
     private String injuryName;
     private Integer injuryScale; //from 1-10
-    private OffsetDateTime timestamp;
+    private LocalDate timestamp;
 
     @Nationalized
     private String injuryDesc;
 
+    @JsonIgnore
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinColumn(name =  "userId")
     private User user;
     
+    @JsonIgnore
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinColumn(name = "jointId")

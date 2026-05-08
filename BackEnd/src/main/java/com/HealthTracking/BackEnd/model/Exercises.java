@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.annotations.Nationalized;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -19,18 +21,25 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Exercises {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer exId;
 
+    private String exImgUrl;
 
     private String exName;
+
+    @Nationalized
+    private String exNameVN;
 
     private String ytUrl;
 
     @Nationalized
     private String exDesc;
+
+    private String exerciseType;
 
     @Nationalized
     @ElementCollection
@@ -41,8 +50,11 @@ public class Exercises {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "partId")
     private BodyPart bodyPart;
+
+    private String equipment;
     
-    private Integer pr;
+    private Integer difficulty; //from 1-3 (easy - intermediate - advanced)
+    private Double pr;
     private String caution;
     private Double suitPerc;
 

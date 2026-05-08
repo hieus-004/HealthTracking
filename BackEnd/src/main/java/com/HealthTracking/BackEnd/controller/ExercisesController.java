@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.HealthTracking.BackEnd.model.BodyPart;
 import com.HealthTracking.BackEnd.model.Exercises;
+import com.HealthTracking.BackEnd.model.dto.ExerciseDTO;
+import com.HealthTracking.BackEnd.model.dto.ExerciseListResponse;
 import com.HealthTracking.BackEnd.services.ExercisesServices;
 
 @RestController
@@ -44,4 +46,27 @@ public class ExercisesController {
         return ResponseEntity.ok(savedEx);
          
     }
+
+    @DeleteMapping("exercises/deleteAll")
+    public String deleteAllEx(){
+        return exercisesServices.deleteAll();
+    }
+
+    @GetMapping("exercisesBrowser")
+    public ResponseEntity<List<ExerciseListResponse>> getExBrowser(){
+        // Lấy dữ liệu thô từ Service
+        List<ExerciseListResponse> data = exercisesServices.getExBrowser();
+        
+        // Đóng gói vào hộp ResponseEntity.ok() (tương đương HTTP Status 200)
+        return ResponseEntity.ok(data);
+    }
+
+    @GetMapping("exercisesDetails/{id}")
+    public ResponseEntity<ExerciseDTO> getExDetails(@PathVariable Integer id){
+        // Lấy dữ liệu thô từ Service
+        ExerciseDTO data = exercisesServices.getExDetails(id);
+        // Đóng gói vào hộp ResponseEntity.ok() (tương đương HTTP Status 200)
+        return ResponseEntity.ok(data);
+    }
+
 }

@@ -7,7 +7,12 @@ import lombok.Setter;
 public class ExerciseListResponse {
     private Integer exerciseId;
     private String exerciseName;
-    private String videoUrl;
+    private String exerciseNameVN;
 
+    private String partName;
+    private Integer difficulty;
+    private String equipment;
+    private Double suitPerc;
+    private Double pr;
     
 }

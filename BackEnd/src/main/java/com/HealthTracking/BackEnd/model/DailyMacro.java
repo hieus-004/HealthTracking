@@ -2,6 +2,8 @@ package com.HealthTracking.BackEnd.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -30,6 +32,7 @@ public class DailyMacro {
     private Double cFat;
     private LocalDate date;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinColumn(name = "userId")
     private User user;

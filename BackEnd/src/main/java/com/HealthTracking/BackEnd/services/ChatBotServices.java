@@ -1,5 +1,7 @@
 package com.HealthTracking.BackEnd.services;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -8,7 +10,6 @@ import org.springframework.web.client.RestClient;
 import com.HealthTracking.BackEnd.model.dto.AgentRequest;
 import com.HealthTracking.BackEnd.model.dto.DailyMacroResponse;
 
-import jakarta.persistence.criteria.CriteriaBuilder.In;
 
 @Service
 public class ChatBotServices {
@@ -22,8 +23,9 @@ public class ChatBotServices {
         // 1. Đóng gói Request kèm theo bối cảnh dinh dưỡng
         AgentRequest req = new AgentRequest();
         req.setAnswer(message);
+        LocalDate today = LocalDate.now();
         // Lấy thông tin dinh dưỡng hiện tại của user để gửi kèm
-        DailyMacroResponse macro = nutriServices.getTodayMacro(id);
+        DailyMacroResponse macro = nutriServices.getTodayMacro(id, today);
         req.setDailyMacro(macro);
         try {
             // 2. Gửi POST request kèm Body

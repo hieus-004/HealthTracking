@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.HealthTracking.BackEnd.model.BodyPart;
 import com.HealthTracking.BackEnd.model.Joints;
 import com.HealthTracking.BackEnd.repo.JointRepo;
 
@@ -22,6 +21,11 @@ public class JointServices {
 
     public List<Joints> saveAll(List<Joints> joints) {
         return jointRepo.saveAll(joints);
+    }
+
+    public String deleteAllJoints() {
+        jointRepo.deleteAll();
+        return "All joints deleted successfully.";
     }
     
 }

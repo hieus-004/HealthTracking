@@ -1,21 +1,22 @@
 @import "tailwindcss";
 
-/* Custom thanh cuộn cho toàn bộ trang hoặc class cụ thể */
+/* Custom thanh cuộn cho toàn bộ trang hoặc class cụ thể (Light Theme) */
 .custom-scrollbar::-webkit-scrollbar {
     width: 5px;  /* Độ rộng thanh dọc */
     height: 5px; /* Độ cao thanh ngang */
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-    background: #1a1a1a; /* Màu nền của đường ray */
+    background: #f8fafc; /* Nền xám siêu nhạt (slate-50) để tệp với background */
+    border-radius: 10px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #333; /* Màu của cục cuộn */
+    background: #cbd5e1; /* Cục cuộn màu xám nhạt (slate-300) */
     border-radius: 10px;
     transition: background 0.3s;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #e22718; /* Chuyển sang màu đỏ khi hover cho ngầu */
+    background: #e22718; /* Vẫn giữ màu đỏ đặc trưng khi hover cho ngầu */
 }
