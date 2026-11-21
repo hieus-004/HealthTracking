@@ -64,3 +64,42 @@ Built on a **Client-Server** model following a standard 3-tier architecture on t
 ```bash
 git clone [https://github.com/](https://github.com/)<username>/HealthTracking.git
 cd HealthTracking
+```
+### 2. Backend Setup (Spring Boot)
+1. Create a new MySQL database (e.g., `health_tracking`).
+2. Update `backend/src/main/resources/application.properties` with your credentials:
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/health_tracking
+spring.datasource.username=YOUR_DB_USERNAME
+spring.datasource.password=YOUR_DB_PASSWORD
+
+# SMTP Email Configuration
+spring.mail.host=smtp.gmail.com
+spring.mail.port=587
+spring.mail.username=YOUR_EMAIL@gmail.com
+spring.mail.password=YOUR_APP_PASSWORD
+
+# JWT & AI API Keys
+jwt.secret=YOUR_JWT_SECRET_KEY
+ai.api.key=YOUR_LLM_API_KEY
+```
+Run the application:
+```Bash
+cd backend
+mvn spring-boot:run
+```
+
+### 3. Frontend Setup (React)
+```bash
+cd frontend
+npm install
+npm run dev
+```
+Open `http://localhost:5173` (or the port shown in your terminal) to view the app.
+
+---
+
+## 🔮 Future Roadmap
+* **Mobile App & Wearables:** Build a React Native mobile client with automated syncing via Apple Health, Google Fit, and smartwatches.
+* **Machine Learning:** Collect real-world user injury data to dynamically optimize Risk Score weights.
+* **AI Vision & OCR:** Add OCR scanning for printed InBody sheets and Computer Vision for real-time exercise form analysis.
